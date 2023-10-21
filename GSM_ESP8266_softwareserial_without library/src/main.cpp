@@ -1,6 +1,9 @@
 #include<Arduino.h>
 #include <SoftwareSerial.h>
 
+String Serial_flush;
+String response;
+
 #define rxPin 13
 #define txPin 15
 #define Pk    12//powerkey
@@ -62,6 +65,7 @@ void send_sms ( String sms)
 void serialfunc() {
 
   Serial.println("Enter the AT Command:");
+  Serial_flush = Serial.readString();
   while (Serial.available() == 0); // reading input from serial monitor
   String command = Serial.readString();
   Serial2.print(command); // writing the user AT command in the softwareserial of GSM module
